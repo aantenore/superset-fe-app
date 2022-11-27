@@ -42,8 +42,6 @@ function IframeExample() {
     </select>
     {chartLink.length > 0?
     <iframe
-      width="600"
-      height="400"
       seamless
       frameBorder="0"
       scrolling="no"
