@@ -26,7 +26,7 @@ function Root() {
               <Link to="/sdk">Sdk</Link>
             </li>
             <li>
-              <Link to="/Iframe">Iframe</Link>
+              <Link to="/iframe">Iframe</Link>
             </li>
           </ul>
         </div>
