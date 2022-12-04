@@ -5,31 +5,31 @@ import axios from 'axios';
 function IframeExample() {
 
   const [chartLink, setChartLink] = useState("");
-  const [chartIds, setChartIds] = useState([]);
+  const [charts, setCharts] = useState([]);
   const [selectedChartId, setSelectedChartId] = useState("")
-  const [dashboardIds, setDashboardIds] = useState([]);
-  const [selectedDashboardId, setSelectedDashboardId] = useState("");
+  const [dashboards, setDashboards] = useState([]);
+  const [selectedDashboardId, setSelectedDashboard] = useState("");
 
   const host = 'http://localhost:32001'
 
   useEffect(() => {
-    if (selectedDashboardId !== "" && dashboardIds !== []) {
-      axios.get(host + '/' + selectedDashboardId +'/chart').then(response => setChartIds(response.data.result)).catch(e => {
+    if (selectedDashboardId !== "" && dashboards !== []) {
+      axios.get(host + '/' + selectedDashboardId +'/chart').then(response => setCharts(response.data.result)).catch(e => {
         console.log(e)
-        setChartIds([])
+        setCharts([])
       })
     } else {
-      axios.get(host + '/chart').then(response => setChartIds(response.data.result)).catch(e => {
+      axios.get(host + '/chart').then(response => setCharts(response.data.result)).catch(e => {
         console.log(e)
-        setChartIds([])
+        setCharts([])
       })
     }
-  }, [selectedDashboardId, dashboardIds])
+  }, [selectedDashboardId, dashboards])
 
   useEffect(() => {
-    axios.get(host + '/dashboard').then(response => setDashboardIds(response.data.result)).catch(e => {
+    axios.get(host + '/dashboard').then(response => setDashboards(response.data.result)).catch(e => {
       console.log(e)
-      setDashboardIds([])
+      setDashboards([])
     })
   }, [])
 
@@ -48,7 +48,7 @@ function IframeExample() {
 
   var handleDashboardSelect = (e) => {
     e.preventDefault()
-    setSelectedDashboardId(e.target.value)
+    setSelectedDashboard(e.target.value)
   }
 
   return (<>
@@ -58,7 +58,7 @@ function IframeExample() {
           value={selectedDashboardId}
     >
       <option value="">Select the dashboard</option>
-      {dashboardIds.map((dashboard, key) => (
+      {dashboards.map((dashboard, key) => (
         <option key={key} value={dashboard.id}>
           {dashboard.dashboard_title}
         </option>
@@ -70,7 +70,7 @@ function IframeExample() {
           value={selectedChartId}
     >
       <option value="">Select the chart</option>
-      {chartIds.map((chart, key) => (
+      {charts.map((chart, key) => (
         <option key={key} value={chart.id}>
           {chart.slice_name}
         </option>
