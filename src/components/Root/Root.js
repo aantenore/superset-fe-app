@@ -14,7 +14,7 @@ function Root() {
       <Router>
         <Routes>
           <Route exact path="/" />
-          <Route path="/sdk" element={<SdkExample/>} />
+          {/* <Route path="/sdk" element={<SdkExample/>} /> */}
           <Route path="/iframe" element={<IframeExample/>} />
         </Routes>
         <div>
@@ -22,9 +22,9 @@ function Root() {
             <li>
               <Link to="/">Home</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/sdk">Sdk</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/iframe">Iframe</Link>
             </li>
