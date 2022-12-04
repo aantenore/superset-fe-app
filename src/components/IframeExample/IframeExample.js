@@ -13,21 +13,21 @@ function IframeExample() {
   const host = 'http://localhost:32001'
 
   useEffect(() => {
+    if (charts?.every(chart => selectedChartId !== chart.id)) {
+      setChartLink("")
+    }
+  }, [charts])
+
+  useEffect(() => {
     if (selectedDashboardId !== "" && dashboards !== []) {
       axios.get(host + '/' + selectedDashboardId +'/chart').then(response => setCharts(response.data.result)).catch(e => {
         console.log(e)
         setCharts([])
-        return []
-      }).then(charts => {
-        if (charts.every(chart => selectedChartId !== chart.id)) {
-          setChartLink("")
-        }
       })
     } else {
       axios.get(host + '/chart').then(response => setCharts(response.data.result)).catch(e => {
         console.log(e)
         setCharts([])
-        return []
       })
     }
   }, [selectedDashboardId, dashboards])
