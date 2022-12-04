@@ -1,14 +1,18 @@
 import './IframeExample.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { saveAs } from 'file-saver'
 
 function IframeExample() {
 
+  const availableFormat = ["csv", "json"]
+  
   const [chartLink, setChartLink] = useState("");
   const [charts, setCharts] = useState([]);
   const [selectedChartId, setSelectedChartId] = useState("")
   const [dashboards, setDashboards] = useState([]);
   const [selectedDashboardId, setSelectedDashboard] = useState("");
+  const [format, setFormat] = useState("csv")
 
   const host = 'http://localhost:32001'
 
@@ -58,6 +62,16 @@ function IframeExample() {
     setSelectedDashboard(e.target.value)
   }
 
+  var download = () => {
+    if (chartLink.length>0) {
+      axios.get(host + '/chart/' + selectedChartId + "/link?format=" + format)
+      .then(response => saveAs(response.data.link))
+      .catch(e => {
+        console.log(e)
+      })
+    }
+  }
+
   return (<>
     <select
           name="Available dashboards"
@@ -84,6 +98,19 @@ function IframeExample() {
       ))}
     </select>
     {chartLink.length > 0?
+    <>
+    <select
+          name="Available format"
+          onChange={e => setFormat(e.target.value)}
+          value={format}
+    >
+    {
+      availableFormat.map(format => {
+        return <option value={format}>{format}</option>
+      })
+    }
+    </select>
+    <button onClick={download}>Download</button>
     <iframe
       title="chartIframe"
       seamless
@@ -92,6 +119,7 @@ function IframeExample() {
       src={chartLink}
     >
     </iframe>
+    </>
     :<></>}
   </>);
 }
