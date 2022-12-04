@@ -15,6 +15,7 @@ function IframeExample() {
   useEffect(() => {
     if (charts?.every(chart => selectedChartId !== chart.id)) {
       setChartLink("")
+      setSelectedChartId("")
     }
   }, [charts])
 
