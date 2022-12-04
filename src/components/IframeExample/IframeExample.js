@@ -17,11 +17,17 @@ function IframeExample() {
       axios.get(host + '/' + selectedDashboardId +'/chart').then(response => setCharts(response.data.result)).catch(e => {
         console.log(e)
         setCharts([])
+        return []
+      }).then(charts => {
+        if (!charts.every(chart => selectedChartId !== chart.id)) {
+          setSelectedChartId("")
+        }
       })
     } else {
       axios.get(host + '/chart').then(response => setCharts(response.data.result)).catch(e => {
         console.log(e)
         setCharts([])
+        return []
       })
     }
   }, [selectedDashboardId, dashboards])
