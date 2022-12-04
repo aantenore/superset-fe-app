@@ -19,7 +19,7 @@ function IframeExample() {
         setCharts([])
         return []
       }).then(charts => {
-        if (!charts.every(chart => selectedChartId !== chart.id)) {
+        if (charts.every(chart => selectedChartId !== chart.id)) {
           setChartLink("")
         }
       })
