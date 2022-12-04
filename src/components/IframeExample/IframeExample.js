@@ -73,10 +73,12 @@ function IframeExample() {
   }
 
   return (<>
+    <div style={{"display":"flex", "justify-content": "center"}}>
     <select
           name="Available dashboards"
           onChange={e => handleDashboardSelect(e)}
           value={selectedDashboardId}
+          style = {{"margin": "0.1%"}}
     >
       <option value="">Select the dashboard</option>
       {dashboards.map((dashboard, key) => (
@@ -89,6 +91,7 @@ function IframeExample() {
           name="Available charts"
           onChange={e => handleChartSelect(e)}
           value={selectedChartId}
+          style = {{"margin": "0.1%"}}
     >
       <option value="">Select the chart</option>
       {charts.map((chart, key) => (
@@ -97,20 +100,9 @@ function IframeExample() {
         </option>
       ))}
     </select>
+    </div>
     {chartLink.length > 0?
     <>
-    <select
-          name="Available format"
-          onChange={e => setFormat(e.target.value)}
-          value={format}
-    >
-    {
-      availableFormat.map(format => {
-        return <option value={format}>{format}</option>
-      })
-    }
-    </select>
-    <button onClick={download}>Download</button>
     <iframe
       title="chartIframe"
       seamless
@@ -119,6 +111,18 @@ function IframeExample() {
       src={chartLink}
     >
     </iframe>
+    <select
+          name="Available format"
+          onChange={e => setFormat(e.target.value)}
+          value={format}
+          style = {{"margin": "0.1%"}}
+    >
+    {
+      availableFormat.map(format => {
+        return <option value={format}>{format}</option>
+      })
+    }
+    </select><button style = {{"margin": "0.1%"}} onClick={download}>Download</button>
     </>
     :<></>}
   </>);
