@@ -17,9 +17,9 @@ function Root() {
             <li>
               <Link to="/">Home</Link>
             </li>
-            {/* <li>
+            <li>
               <Link to="/sdk">Sdk</Link>
-            </li> */}
+            </li>
             <li>
               <Link to="/iframe">Iframe</Link>
             </li>
@@ -32,7 +32,7 @@ function Root() {
             <div style={{"align-self": "flex-end"}}>Apache Superset POT by Antonio Antenore</div>
           </div>
           }/>
-          {/* <Route path="/sdk" element={<SdkExample/>} /> */}
+          <Route path="/sdk" element={<SdkExample/>} />
           <Route path="/iframe" element={<IframeExample/>} />
         </Routes>
       </Router>

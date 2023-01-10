@@ -18,7 +18,6 @@ function IframeExample() {
 
   useEffect(() => {
     if (charts?.every(chart => selectedChartId !== chart.id)) {
-      setChartLink("")
       setSelectedChartId("")
     }
   }, [charts])
@@ -59,6 +58,9 @@ function IframeExample() {
 
   var handleDashboardSelect = (e) => {
     e.preventDefault()
+    dashboards?.filter(d => {
+      return d.id?.toString() === e.target.value?.toString();
+    })?.map(d => setChartLink(d.url))
     setSelectedDashboard(e.target.value)
   }
 
